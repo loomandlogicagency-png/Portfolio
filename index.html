@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loom and Logic Agency | Portfolio</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -86,11 +92,20 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-text {
             background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.5rem;
         }
 
         .nav-links {
@@ -702,7 +717,9 @@
     <!-- Header -->
     <header id="header">
         <nav class="container">
-            <div class="logo">LOOM AND LOGIC</div>
+            <div class="logo">
+                <span class="logo-text">LOOM AND LOGIC</span>
+            </div>
             <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                 <span></span>
                 <span></span>
