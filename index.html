@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loom and Logic Agency | Portfolio</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
     <style>
         * {
             margin: 0;
@@ -24,57 +18,14 @@
             --card-bg: rgba(255, 255, 255, 0.03);
             --text-gray: #a0aec0;
             --border-color: rgba(0, 217, 255, 0.1);
-            
-            /* Typography Variables */
-            --font-heading: 'Montserrat', sans-serif;
-            --font-body: 'Inter', sans-serif;
         }
 
         body {
-            font-family: var(--font-body);
-            font-size: 16px;
-            font-weight: 400;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--dark-bg);
             color: #ffffff;
             overflow-x: hidden;
-        }
-
-        /* Heading Styles */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-
-        h2 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        /* Body Text */
-        p {
-            font-size: 1.0625rem; /* 17px */
-            line-height: 1.7;
-            font-weight: 400;
-        }
-
-        /* Small Text */
-        small, .small-text {
-            font-size: 0.9375rem; /* 15px */
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .container {
@@ -133,10 +84,8 @@
         }
 
         .logo {
-            font-family: var(--font-heading);
             font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: 0.02em;
+            font-weight: bold;
             background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -154,10 +103,7 @@
         .nav-links a {
             color: #ffffff;
             text-decoration: none;
-            font-family: var(--font-body);
             font-weight: 500;
-            font-size: 0.9375rem;
-            letter-spacing: 0.01em;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -187,10 +133,7 @@
             padding: 12px 30px;
             border-radius: 50px;
             text-decoration: none;
-            font-family: var(--font-body);
             font-weight: 600;
-            font-size: 0.9375rem;
-            letter-spacing: 0.01em;
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
@@ -222,24 +165,20 @@
         }
 
         .section-title {
-            font-family: var(--font-heading);
             font-size: 2.8rem;
-            font-weight: 700;
             margin-bottom: 20px;
-            letter-spacing: -0.01em;
             background: linear-gradient(135deg, #ffffff, var(--primary-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-align: center;
         }
 
         .section-subtitle {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 1.125rem;
-            font-weight: 400;
-            line-height: 1.6;
+            font-size: 1.2rem;
             margin-bottom: 60px;
+            text-align: center;
         }
 
         /* Hero Section */
@@ -257,35 +196,28 @@
         }
 
         .hero h1 {
-            font-family: var(--font-heading);
             font-size: 4rem;
-            font-weight: 800;
             margin-bottom: 25px;
-            letter-spacing: -0.02em;
             background: linear-gradient(135deg, #ffffff, var(--primary-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            line-height: 1.1;
+            line-height: 1.2;
         }
 
         .hero-tagline {
             color: var(--primary-cyan);
-            font-family: var(--font-body);
-            font-size: 1.0625rem;
-            font-weight: 600;
+            font-size: 1.2rem;
             margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 3px;
         }
 
         .hero-description {
-            font-family: var(--font-body);
-            font-size: 1.25rem;
-            font-weight: 400;
+            font-size: 1.4rem;
             color: var(--text-gray);
             margin-bottom: 40px;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         .hero-buttons {
@@ -302,10 +234,7 @@
             padding: 12px 30px;
             border-radius: 50px;
             text-decoration: none;
-            font-family: var(--font-body);
             font-weight: 600;
-            font-size: 0.9375rem;
-            letter-spacing: 0.01em;
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -348,6 +277,13 @@
             justify-content: center;
             font-size: 4rem;
             border-bottom: 1px solid var(--border-color);
+            padding: 20px;
+        }
+
+        .project-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
         .project-content {
@@ -356,28 +292,21 @@
 
         .project-category {
             color: var(--primary-cyan);
-            font-family: var(--font-body);
-            font-size: 0.8125rem;
-            font-weight: 600;
+            font-size: 0.9rem;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
+            letter-spacing: 2px;
             margin-bottom: 10px;
         }
 
         .project-card h3 {
-            font-family: var(--font-heading);
             font-size: 1.5rem;
-            font-weight: 600;
             margin-bottom: 15px;
             color: #ffffff;
-            letter-spacing: -0.01em;
         }
 
         .project-card p {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.8;
             margin-bottom: 20px;
         }
 
@@ -392,9 +321,7 @@
             border: 1px solid rgba(0, 217, 255, 0.3);
             padding: 5px 15px;
             border-radius: 20px;
-            font-family: var(--font-body);
-            font-size: 0.8125rem;
-            font-weight: 500;
+            font-size: 0.85rem;
             color: var(--primary-cyan);
         }
 
@@ -440,18 +367,25 @@
         }
 
         .service-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             z-index: 1;
         }
 
+        .service-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
         .service-card h3 {
-            font-family: var(--font-heading);
             font-size: 1.5rem;
-            font-weight: 600;
             margin-bottom: 15px;
-            letter-spacing: -0.01em;
             color: var(--primary-cyan);
             position: relative;
             z-index: 1;
@@ -459,11 +393,9 @@
 
         .service-card p {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 1rem;
             position: relative;
             z-index: 1;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         /* Process Section */
@@ -487,27 +419,21 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-heading);
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: bold;
             margin: 0 auto 25px;
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
         }
 
         .process-step h3 {
-            font-family: var(--font-heading);
             font-size: 1.3rem;
-            font-weight: 600;
             margin-bottom: 15px;
-            letter-spacing: -0.01em;
             color: #ffffff;
         }
 
         .process-step p {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.8;
         }
 
         /* Testimonials */
@@ -536,10 +462,8 @@
 
         .testimonial-text {
             color: var(--text-gray);
-            font-family: var(--font-body);
             font-style: italic;
-            font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.8;
             margin-bottom: 25px;
         }
 
@@ -557,23 +481,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: var(--font-heading);
             font-size: 1.5rem;
-            font-weight: 600;
         }
 
         .author-info h4 {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: 1rem;
             color: #ffffff;
             margin-bottom: 5px;
         }
 
         .author-info p {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 0.875rem;
+            font-size: 0.9rem;
         }
 
         /* Stats Section */
@@ -590,22 +508,17 @@
         }
 
         .stat-item h3 {
-            font-family: var(--font-heading);
             font-size: 3.5rem;
-            font-weight: 800;
             background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 10px;
-            letter-spacing: -0.02em;
         }
 
         .stat-item p {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 1.0625rem;
-            font-weight: 500;
+            font-size: 1.1rem;
         }
 
         /* Contact Section */
@@ -617,19 +530,14 @@
         }
 
         .contact-info h3 {
-            font-family: var(--font-heading);
             font-size: 1.8rem;
-            font-weight: 600;
             margin-bottom: 20px;
-            letter-spacing: -0.01em;
             color: var(--primary-cyan);
         }
 
         .contact-info p {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.8;
             margin-bottom: 30px;
         }
 
@@ -680,9 +588,6 @@
             display: block;
             margin-bottom: 10px;
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 0.9375rem;
-            font-weight: 500;
         }
 
         .form-group input,
@@ -693,8 +598,7 @@
             border: 1px solid var(--border-color);
             border-radius: 10px;
             color: #ffffff;
-            font-family: var(--font-body);
-            font-size: 1rem;
+            font-family: inherit;
             transition: all 0.3s ease;
         }
 
@@ -725,19 +629,13 @@
 
         .footer-section h4 {
             color: var(--primary-cyan);
-            font-family: var(--font-heading);
-            font-weight: 600;
-            font-size: 1.125rem;
             margin-bottom: 20px;
-            letter-spacing: -0.01em;
         }
 
         .footer-section p,
         .footer-section a {
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 0.9375rem;
-            line-height: 1.7;
+            line-height: 1.8;
             text-decoration: none;
             display: block;
             margin-bottom: 10px;
@@ -752,33 +650,10 @@
             padding-top: 30px;
             border-top: 1px solid var(--border-color);
             color: var(--text-gray);
-            font-family: var(--font-body);
-            font-size: 0.9375rem;
         }
 
-        /* Responsive Typography */
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2, .section-title {
-                font-size: 2rem;
-            }
-
-            h3 {
-                font-size: 1.25rem;
-            }
-
-            p, .hero-description {
-                font-size: 1rem;
-            }
-
-            .hero-tagline {
-                font-size: 0.875rem;
-                letter-spacing: 0.1em;
-            }
-
             .mobile-menu-toggle {
                 display: flex;
             }
@@ -805,10 +680,6 @@
 
             .section-title {
                 font-size: 2rem;
-            }
-
-            .hero-description {
-                font-size: 1rem;
             }
 
             .contact-grid {
@@ -890,7 +761,7 @@
             
             <div class="portfolio-grid">
                 <div class="project-card reveal">
-                    <div class="project-image">📊</div>
+                    <div class="project-image"><img src="assets/3d_workflow.png" alt="Workflow Automation"></div>
                     <div class="project-content">
                         <p class="project-category">Workflow Automation</p>
                         <h3>SaaS Customer Onboarding System</h3>
@@ -904,7 +775,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image">🤖</div>
+                    <div class="project-image"><img src="assets/3d_chatbot.png" alt="AI Chatbot"></div>
                     <div class="project-content">
                         <p class="project-category">AI Chatbot</p>
                         <h3>24/7 Customer Support Bot</h3>
@@ -918,11 +789,11 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image">🎯</div>
+                    <div class="project-image"><img src="assets/3d_crm.png" alt="CRM Integration"></div>
                     <div class="project-content">
                         <p class="project-category">CRM Integration</p>
                         <h3>Sales Pipeline Automation</h3>
-                        <p>Connected marketing tools, CRM, and communication platforms. Automated lead scoring, follow-ups, and reporting. Increased conversion rate by 35%.</p>
+                        <p>Streamlined sales process by automating lead capture, qualification, and follow-ups. Increased sales team productivity by 40%.</p>
                         <div class="tech-tags">
                             <span class="tech-tag">Zapier</span>
                             <span class="tech-tag">HubSpot</span>
@@ -932,7 +803,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image">📈</div>
+                    <div class="project-image"><img src="assets/3d_ai_agent.png" alt="AI Agent"></div>
                     <div class="project-content">
                         <p class="project-category">AI Agent</p>
                         <h3>Intelligent Lead Qualification Agent</h3>
@@ -946,7 +817,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image">👤</div>
+                    <div class="project-image"><img src="assets/3d_virtual_assistant.png" alt="Virtual Assistance"></div>
                     <div class="project-content">
                         <p class="project-category">Virtual Assistance</p>
                         <h3>Executive Support Package</h3>
@@ -960,7 +831,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image">⚡</div>
+                    <div class="project-image"><img src="assets/3d_data_sync.png" alt="Process Automation"></div>
                     <div class="project-content">
                         <p class="project-category">Process Automation</p>
                         <h3>Multi-Platform Data Sync</h3>
@@ -972,25 +843,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- ADD YOUR NEW PROJECTS BELOW THIS COMMENT -->
-                <!-- Copy and paste this template, then customize it -->
-                
-                <!-- EXAMPLE NEW PROJECT 1
-                <div class="project-card reveal">
-                    <div class="project-image">📧</div>
-                    <div class="project-content">
-                        <p class="project-category">Email Automation</p>
-                        <h3>Your Project Title Here</h3>
-                        <p>Your project description here. Explain what you built and the results achieved.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Technology 1</span>
-                            <span class="tech-tag">Technology 2</span>
-                            <span class="tech-tag">Technology 3</span>
-                        </div>
-                    </div>
-                </div>
-                -->
 
             </div>
         </div>
@@ -1004,37 +856,37 @@
             
             <div class="services-grid">
                 <div class="service-card reveal">
-                    <div class="service-icon">⚙️</div>
+                    <div class="service-icon"><img src="assets/3d_workflow.png" alt="Workflow Automation"></div>
                     <h3>Workflow Automation</h3>
                     <p>Streamline repetitive tasks and connect your tools seamlessly. Build custom workflows that run on autopilot, saving time and reducing errors.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon">🤖</div>
+                    <div class="service-icon"><img src="assets/3d_chatbot.png" alt="AI Chatbots"></div>
                     <h3>AI Chatbots</h3>
                     <p>Engage customers 24/7 with intelligent chatbots that understand context, provide real value, and escalate to humans when needed.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon">🧠</div>
+                    <div class="service-icon"><img src="assets/3d_ai_agent.png" alt="AI Agents"></div>
                     <h3>AI Agents</h3>
                     <p>Deploy autonomous AI agents that handle complex tasks, make intelligent decisions, and learn from every interaction.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon">📈</div>
+                    <div class="service-icon"><img src="assets/3d_crm.png" alt="CRM Integration"></div>
                     <h3>CRM Integration</h3>
                     <p>Optimize customer relationships with smart CRM systems that track leads, analyze patterns, and nurture relationships automatically.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon">👤</div>
+                    <div class="service-icon"><img src="assets/3d_virtual_assistant.png" alt="Virtual Assistance"></div>
                     <h3>Virtual Assistance</h3>
                     <p>Get dedicated support for administrative tasks, customer service, scheduling, research, and day-to-day business operations.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon">🎯</div>
+                    <div class="service-icon"><img src="assets/3d_custom_solutions.png" alt="Custom Solutions"></div>
                     <h3>Custom Solutions</h3>
                     <p>Tailored automation strategies designed specifically for your unique business needs, challenges, and growth goals.</p>
                 </div>
@@ -1155,57 +1007,44 @@
             <div class="contact-grid">
                 <div class="contact-info reveal">
                     <h3>Get in Touch</h3>
-                    <p>Whether you need workflow automation, AI agents, virtual assistance, or a custom solution, we're here to help. Let's discuss your project and how we can drive real results for your business.</p>
+                    <p>Have a project in mind? We'd love to hear from you. Let's discuss how we can help you automate your business and free up your time.</p>
                     
                     <div class="contact-methods">
                         <div class="contact-method">
                             <div class="contact-icon">📧</div>
                             <div>
-                                <strong>Email</strong><br>
-                                <a href="mailto:loomandlogicagency@gmail.com">loomandlogicagency@gmail.com</a>
+                                <h4>Email Us</h4>
+                                <a href="mailto:hello@loomandlogic.com">hello@loomandlogic.com</a>
                             </div>
                         </div>
-                        
                         <div class="contact-method">
-                            <div class="contact-icon">⚡</div>
+                            <div class="contact-icon">📅</div>
                             <div>
-                                <strong>Response Time</strong><br>
-                                Within 24 hours
-                            </div>
-                        </div>
-                        
-                        <div class="contact-method">
-                            <div class="contact-icon">🌍</div>
-                            <div>
-                                <strong>Location</strong><br>
-                                Nairobi, Kenya (Serving Global Clients)
+                                <h4>Book a Call</h4>
+                                <a href="#">Schedule a discovery session</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-form reveal">
-                    <form onsubmit="handleSubmit(event)">
+                    <form id="contactForm">
                         <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" required>
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
                         </div>
-                        
                         <div class="form-group">
                             <label for="service">Service Interested In</label>
-                            <input type="text" id="service" name="service" placeholder="e.g., Workflow Automation, AI Chatbot">
+                            <input type="text" id="service" name="service" placeholder="e.g., Workflow Automation">
                         </div>
-                        
                         <div class="form-group">
-                            <label for="message">Tell Us About Your Project</label>
-                            <textarea id="message" name="message" required></textarea>
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
                         </div>
-                        
                         <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
@@ -1218,41 +1057,38 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Loom and Logic Agency</h4>
-                    <p>Helping B2B founders scale through intelligent automation and virtual assistance.</p>
+                    <div class="logo" style="margin-bottom: 20px;">LOOM AND LOGIC</div>
+                    <p>Empowering B2B founders through intelligent automation and dedicated virtual assistance.</p>
                 </div>
-                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#hero">Home</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#services">Services</a>
+                    <a href="#process">Process</a>
+                </div>
                 <div class="footer-section">
                     <h4>Services</h4>
                     <a href="#services">Workflow Automation</a>
                     <a href="#services">AI Chatbots</a>
-                    <a href="#services">AI Agents</a>
                     <a href="#services">CRM Integration</a>
                     <a href="#services">Virtual Assistance</a>
                 </div>
-                
                 <div class="footer-section">
-                    <h4>Company</h4>
-                    <a href="#portfolio">Portfolio</a>
-                    <a href="#process">Our Process</a>
-                    <a href="#testimonials">Testimonials</a>
-                    <a href="#contact">Contact Us</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Tech Stack</h4>
-                    <p>n8n • Python • Zapier • Airtable • OpenAI • Custom APIs</p>
+                    <h4>Connect</h4>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
                 </div>
             </div>
-            
             <div class="footer-bottom">
-                <p>&copy; 2025 Loom and Logic Agency. All rights reserved.</p>
+                <p>&copy; 2024 Loom and Logic Agency. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Header scroll effect
+        // Header Scroll Effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
@@ -1262,61 +1098,38 @@
             }
         });
 
-        // Mobile menu toggle
+        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
 
-        // Scroll reveal animation
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // Simple Scroll Reveal
         const revealElements = document.querySelectorAll('.reveal');
-        
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('active');
                 }
             });
-        }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -50px 0px'
-        });
+        };
 
-        revealElements.forEach(element => {
-            revealObserver.observe(element);
-        });
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
 
-        // Form submission
-        function handleSubmit(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData);
-            
-            // Create mailto link
-            const subject = encodeURIComponent(`New Project Inquiry from ${data.name}`);
-            const body = encodeURIComponent(`
-Name: ${data.name}
-Email: ${data.email}
-Service: ${data.service}
-
-Message:
-${data.message}
-            `);
-            
-            window.location.href = `mailto:loomandlogicagency@gmail.com?subject=${subject}&body=${body}`;
-            
-            // Show success message
-            alert('Thank you! Your message is being prepared. Your email client will open to send the message.');
-            event.target.reset();
-        }
-
-        // Smooth scroll for all anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                scrollToSection(targetId);
-            });
+        // Form Submission (Prevent default for demo)
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! This is a demo, so no email was actually sent.');
         });
     </script>
 </body>
