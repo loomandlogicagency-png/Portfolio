@@ -1261,87 +1261,104 @@
 
         requestAnimationFrame(raf);
 
-        // Initialize Vanilla Tilt on all cards
-        VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
-            max: 25,
-            scale: 1.05,
-            speed: 400,
-            transition: true,
+        // Wait for DOM to be fully ready before initializing Swiper
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // Initialize Portfolio Swiper
+            const portfolioSwiper = new Swiper('#portfolioSwiper', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                pagination: {
+                    el: '#portfolioSwiper .swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '#portfolioSwiper .swiper-button-next',
+                    prevEl: '#portfolioSwiper .swiper-button-prev',
+                },
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                    },
+                    1024: {
+                        slidesPerView: 'auto',
+                    },
+                }
+            });
+
+            // Initialize Services Swiper
+            const servicesSwiper = new Swiper('#servicesSwiper', {
+                effect: 'cards',
+                grabCursor: true,
+                cardsEffect: {
+                    perSlideRotate: 2,
+                    perSlideOffset: 8,
+                },
+                pagination: {
+                    el: '#servicesSwiper .swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '#servicesSwiper .swiper-button-next',
+                    prevEl: '#servicesSwiper .swiper-button-prev',
+                },
+                loop: true,
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                },
+                breakpoints: {
+                    640: {
+                        slidesPerView: 1,
+                        cardsEffect: {
+                            perSlideRotate: 2,
+                            perSlideOffset: 8,
+                        }
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                        cardsEffect: {
+                            perSlideRotate: 2,
+                            perSlideOffset: 8,
+                        }
+                    },
+                }
+            });
+
+            // Initialize Vanilla Tilt on all cards
+            setTimeout(() => {
+                VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+                    max: 15,
+                    scale: 1.02,
+                    speed: 300,
+                    transition: true,
+                });
+            }, 100);
         });
 
-        // Initialize Portfolio Swiper
-        const portfolioSwiper = new Swiper('#portfolioSwiper', {
-            effect: 'coverflow',
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            coverflowEffect: {
-                rotate: 50,
-                stretch: 0,
-                depth: 100,
-                modifier: 1,
-                slideShadows: true,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            loop: true,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                },
-                1024: {
-                    slidesPerView: 'auto',
-                },
-            }
-        });
-
-        // Initialize Services Swiper
-        const servicesSwiper = new Swiper('#servicesSwiper', {
-            effect: 'cards',
-            grabCursor: true,
-            cardsEffect: {
-                perSlideRotate: 2,
-                perSlideOffset: 8,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            loop: true,
-            autoplay: {
-                delay: 4000,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                    cardsEffect: {
-                        perSlideRotate: 2,
-                        perSlideOffset: 8,
-                    }
-                },
-                1024: {
-                    slidesPerView: 3,
-                    cardsEffect: {
-                        perSlideRotate: 2,
-                        perSlideOffset: 8,
-                    }
-                },
-            }
+            // Initialize Vanilla Tilt on all cards
+            setTimeout(() => {
+                VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+                    max: 15,
+                    scale: 1.02,
+                    speed: 300,
+                    transition: true,
+                });
+            }, 100);
         });
 
         // Header Scroll Effect
@@ -1383,10 +1400,12 @@
         window.addEventListener('load', revealOnScroll);
 
         // Form Submission (Prevent default for demo)
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! This is a demo, so no email was actually sent.');
-        });
+        if (document.getElementById('contactForm')) {
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! This is a demo, so no email was actually sent.');
+            });
+        }
     </script>
 </body>
 </html>
