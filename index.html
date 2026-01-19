@@ -34,29 +34,15 @@
             padding: 0 20px;
         }
 
-        /* Background Animation */
-        .bg-animation {
+        /* Canvas background layer for particle effect */
+        #particleCanvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             z-index: -1;
-            overflow: hidden;
-        }
-
-        .gradient-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.1;
-            animation: float 25s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(60px, -60px) scale(1.15); }
-            66% { transform: translate(-40px, 40px) scale(0.85); }
+            display: block;
         }
 
         /* Header/Navigation */
@@ -667,7 +653,6 @@
                 background: rgba(10, 14, 39, 0.98);
                 flex-direction: column;
                 padding: 20px;
-                border-bottom: 1px solid var(--border-color);
             }
 
             .nav-links.active {
@@ -711,12 +696,8 @@
     </style>
 </head>
 <body>
-    <!-- Background Animation -->
-    <div class="bg-animation">
-        <div class="gradient-orb" style="width: 500px; height: 500px; background: var(--primary-cyan); top: 5%; left: 5%;"></div>
-        <div class="gradient-orb" style="width: 400px; height: 400px; background: var(--primary-purple); bottom: 10%; right: 10%; animation-delay: -8s;"></div>
-        <div class="gradient-orb" style="width: 350px; height: 350px; background: var(--primary-cyan); top: 50%; left: 50%; animation-delay: -15s;"></div>
-    </div>
+    <!-- Canvas for particle field background -->
+    <canvas id="particleCanvas"></canvas>
 
     <!-- Header -->
     <header id="header">
@@ -1088,15 +1069,160 @@
     </footer>
 
     <script>
-        // Header Scroll Effect
+        // Particle Field / Data Flow Effect
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        // Detect device type and optimize particle count
+        function getOptimizedSettings() {
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth < 1024;
+            
+            if (isMobile) {
+                return {
+                    particleCount: 40,
+                    connectionDistance: 100,
+                    speed: 1.0
+                };
+            } else if (isTablet) {
+                return {
+                    particleCount: 60,
+                    connectionDistance: 120,
+                    speed: 1.2
+                };
+            } else {
+                return {
+                    particleCount: 80,
+                    connectionDistance: 150,
+                    speed: 1.5
+                };
+            }
+        }
+
+        let settings = getOptimizedSettings();
+        
+        // Particle system
+        const particles = [];
+        let particleCount = settings.particleCount;
+        let connectionDistance = settings.connectionDistance;
+        let particleSpeed = settings.speed;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * particleSpeed;
+                this.vy = (Math.random() - 0.5) * particleSpeed;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.opacity = Math.random() * 0.4 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Wrap around edges
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 217, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // Initialize particles
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawConnections() {
+            // Use squared distance to avoid sqrt calculations
+            const connectionDistanceSq = connectionDistance * connectionDistance;
+            
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distanceSq = dx * dx + dy * dy;
+
+                    if (distanceSq < connectionDistanceSq) {
+                        const distance = Math.sqrt(distanceSq);
+                        const opacity = (1 - distance / connectionDistance) * 0.25;
+                        ctx.strokeStyle = `rgba(0, 217, 255, ${opacity})`;
+                        ctx.lineWidth = 0.8;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            // Clear canvas with semi-transparent background for trail effect
+            ctx.fillStyle = 'rgba(10, 14, 39, 0.15)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Update and draw particles
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+
+            // Draw connections between nearby particles
+            drawConnections();
+
+            requestAnimationFrame(animate);
+        }
+
+        // Handle window resize with debounce
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                
+                // Re-optimize settings on resize
+                const newSettings = getOptimizedSettings();
+                if (newSettings.particleCount !== particleCount) {
+                    particleCount = newSettings.particleCount;
+                    connectionDistance = newSettings.connectionDistance;
+                    particleSpeed = newSettings.speed;
+                    
+                    // Adjust particle count
+                    if (particles.length > particleCount) {
+                        particles.splice(particleCount);
+                    } else if (particles.length < particleCount) {
+                        for (let i = particles.length; i < particleCount; i++) {
+                            particles.push(new Particle());
+                        }
+                    }
+                }
+            }, 250);
+        });
+
+        // Header Scroll Effect with passive listener
+        let scrollTimeout;
         window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-        });
+        }, { passive: true });
 
         // Mobile Menu Toggle
         function toggleMobileMenu() {
@@ -1111,19 +1237,23 @@
             });
         });
 
-        // Simple Scroll Reveal
+        // Simple Scroll Reveal with passive listener
         const revealElements = document.querySelectorAll('.reveal');
+        let revealTimeout;
         const revealOnScroll = () => {
-            revealElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (elementTop < windowHeight - 100) {
-                    el.classList.add('active');
-                }
-            });
+            clearTimeout(revealTimeout);
+            revealTimeout = setTimeout(() => {
+                revealElements.forEach(el => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (elementTop < windowHeight - 100) {
+                        el.classList.add('active');
+                    }
+                });
+            }, 100);
         };
 
-        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('scroll', revealOnScroll, { passive: true });
         window.addEventListener('load', revealOnScroll);
 
         // Form Submission (Prevent default for demo)
@@ -1131,6 +1261,9 @@
             e.preventDefault();
             alert('Thank you for your message! This is a demo, so no email was actually sent.');
         });
+
+        // Start animation
+        animate();
     </script>
 </body>
 </html>
