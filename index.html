@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loom and Logic Agency | Portfolio</title>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         * {
             margin: 0;
@@ -28,10 +30,32 @@
             line-height: 1.6;
         }
 
+        /* Grainy Texture Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/></filter><rect width="100" height="100" fill="%23000000" filter="url(%23noise)" opacity="0.03"/></svg>');
+            background-size: 100px 100px;
+            pointer-events: none;
+            z-index: 1;
+            animation: grain 8s steps(10) infinite;
+        }
+
+        @keyframes grain {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         /* Background Animation */
@@ -41,7 +65,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
             overflow: hidden;
         }
 
@@ -91,6 +115,11 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .nav-links {
@@ -138,6 +167,8 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+            position: relative;
+            overflow: hidden;
         }
 
         .cta-button:hover {
@@ -162,6 +193,8 @@
         /* Page Sections */
         section {
             padding: 120px 0;
+            position: relative;
+            z-index: 2;
         }
 
         .section-title {
@@ -244,12 +277,23 @@
             transform: translateY(-2px);
         }
 
-        /* Portfolio Grid */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+        /* Portfolio Swiper */
+        .portfolio-swiper-container {
             margin-top: 60px;
+            position: relative;
+        }
+
+        .swiper {
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        .swiper-slide {
+            width: 350px;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .project-card {
@@ -260,6 +304,11 @@
             overflow: hidden;
             transition: all 0.4s ease;
             cursor: pointer;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
         }
 
         .project-card:hover {
@@ -288,6 +337,9 @@
 
         .project-content {
             padding: 30px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-category {
@@ -308,6 +360,7 @@
             color: var(--text-gray);
             line-height: 1.8;
             margin-bottom: 20px;
+            flex: 1;
         }
 
         .tech-tags {
@@ -325,12 +378,15 @@
             color: var(--primary-cyan);
         }
 
-        /* Services Grid */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+        /* Services Swiper */
+        .services-swiper-container {
             margin-top: 60px;
+            position: relative;
+        }
+
+        .swiper-slide-services {
+            width: 280px;
+            height: auto;
         }
 
         .service-card {
@@ -342,6 +398,10 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transform-style: preserve-3d;
         }
 
         .service-card::before {
@@ -396,6 +456,39 @@
             position: relative;
             z-index: 1;
             line-height: 1.8;
+            flex: 1;
+        }
+
+        /* Swiper Navigation */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--primary-cyan);
+            background: rgba(0, 217, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+            background: rgba(0, 217, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+        }
+
+        .swiper-button-next::after,
+        .swiper-button-prev::after {
+            font-size: 20px;
+        }
+
+        .swiper-pagination-bullet {
+            background: rgba(0, 217, 255, 0.3);
+            opacity: 1;
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--primary-cyan);
         }
 
         /* Process Section */
@@ -423,6 +516,11 @@
             font-weight: bold;
             margin: 0 auto 25px;
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover .step-number {
+            transform: scale(1.1) rotateZ(5deg);
         }
 
         .process-step h3 {
@@ -451,6 +549,12 @@
             border-radius: 20px;
             padding: 40px;
             position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--primary-cyan);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.15);
         }
 
         .quote-icon {
@@ -686,9 +790,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .portfolio-grid,
-            .services-grid {
-                grid-template-columns: 1fr;
+            .swiper-slide {
+                width: 100%;
+            }
+
+            .swiper-slide-services {
+                width: 100%;
             }
         }
 
@@ -759,91 +866,110 @@
             <h2 class="section-title">Featured Projects</h2>
             <p class="section-subtitle">Real solutions that delivered measurable results for our clients</p>
             
-            <div class="portfolio-grid">
-                <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
-                    <div class="project-content">
-                        <p class="project-category">Workflow Automation</p>
-                        <h3>SaaS Customer Onboarding System</h3>
-                        <p>Automated complete customer onboarding workflow, reducing manual work from 2 days to 2 hours per client. Integrated with CRM and email marketing platforms.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">n8n</span>
-                            <span class="tech-tag">Airtable</span>
-                            <span class="tech-tag">Zapier</span>
+            <div class="portfolio-swiper-container">
+                <div class="swiper" id="portfolioSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="project-card" data-tilt>
+                                <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
+                                <div class="project-content">
+                                    <p class="project-category">Workflow Automation</p>
+                                    <h3>SaaS Customer Onboarding System</h3>
+                                    <p>Automated complete customer onboarding workflow, reducing manual work from 2 days to 2 hours per client. Integrated with CRM and email marketing platforms.</p>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">n8n</span>
+                                        <span class="tech-tag">Airtable</span>
+                                        <span class="tech-tag">Zapier</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="project-card" data-tilt>
+                                <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbot"></div>
+                                <div class="project-content">
+                                    <p class="project-category">AI Chatbot</p>
+                                    <h3>24/7 Customer Support Bot</h3>
+                                    <p>Built intelligent chatbot handling 80% of customer inquiries automatically, with seamless handoff to human agents for complex issues. Reduced support costs by 60%.</p>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">OpenAI</span>
+                                        <span class="tech-tag">Custom API</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="project-card" data-tilt>
+                                <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
+                                <div class="project-content">
+                                    <p class="project-category">CRM Integration</p>
+                                    <h3>Sales Pipeline Automation</h3>
+                                    <p>Streamlined sales process by automating lead capture, qualification, and follow-ups. Increased sales team productivity by 40%.</p>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Zapier</span>
+                                        <span class="tech-tag">HubSpot</span>
+                                        <span class="tech-tag">Python</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="project-card" data-tilt>
+                                <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agent"></div>
+                                <div class="project-content">
+                                    <p class="project-category">AI Agent</p>
+                                    <h3>Intelligent Lead Qualification Agent</h3>
+                                    <p>Deployed autonomous AI agent that qualifies leads, schedules meetings, and enriches contact data. Saved sales team 15+ hours weekly.</p>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Python</span>
+                                        <span class="tech-tag">n8n</span>
+                                        <span class="tech-tag">AI/ML</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="project-card" data-tilt>
+                                <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
+                                <div class="project-content">
+                                    <p class="project-category">Virtual Assistance</p>
+                                    <h3>Executive Support Package</h3>
+                                    <p>Provided dedicated virtual assistant for calendar management, email coordination, research, and administrative tasks. Freed up 20 hours monthly for strategic work.</p>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">Admin Support</span>
+                                        <span class="tech-tag">Scheduling</span>
+                                        <span class="tech-tag">Research</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class="project-card" data-tilt>
+                                <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/GgFPxKiEOssnkWPu.png" alt="Process Automation"></div>
+                                <div class="project-content">
+                                    <p class="project-category">Process Automation</p>
+                                    <h3>Multi-Platform Data Sync</h3>
+                                    <p>Built custom automation syncing data across 5 different platforms in real-time. Eliminated manual data entry and reduced errors by 95%.</p>
+                                    <div class="tech-tags">
+                                        <span class="tech-tag">n8n</span>
+                                        <span class="tech-tag">API Integration</span>
+                                        <span class="tech-tag">Airtable</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbot"></div>
-                    <div class="project-content">
-                        <p class="project-category">AI Chatbot</p>
-                        <h3>24/7 Customer Support Bot</h3>
-                        <p>Built intelligent chatbot handling 80% of customer inquiries automatically, with seamless handoff to human agents for complex issues. Reduced support costs by 60%.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">OpenAI</span>
-                            <span class="tech-tag">Custom API</span>
-                        </div>
-                    </div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
-
-                <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
-                    <div class="project-content">
-                        <p class="project-category">CRM Integration</p>
-                        <h3>Sales Pipeline Automation</h3>
-                        <p>Streamlined sales process by automating lead capture, qualification, and follow-ups. Increased sales team productivity by 40%.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Zapier</span>
-                            <span class="tech-tag">HubSpot</span>
-                            <span class="tech-tag">Python</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agent"></div>
-                    <div class="project-content">
-                        <p class="project-category">AI Agent</p>
-                        <h3>Intelligent Lead Qualification Agent</h3>
-                        <p>Deployed autonomous AI agent that qualifies leads, schedules meetings, and enriches contact data. Saved sales team 15+ hours weekly.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">n8n</span>
-                            <span class="tech-tag">AI/ML</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
-                    <div class="project-content">
-                        <p class="project-category">Virtual Assistance</p>
-                        <h3>Executive Support Package</h3>
-                        <p>Provided dedicated virtual assistant for calendar management, email coordination, research, and administrative tasks. Freed up 20 hours monthly for strategic work.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Admin Support</span>
-                            <span class="tech-tag">Scheduling</span>
-                            <span class="tech-tag">Research</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/GgFPxKiEOssnkWPu.png" alt="Process Automation"></div>
-                    <div class="project-content">
-                        <p class="project-category">Process Automation</p>
-                        <h3>Multi-Platform Data Sync</h3>
-                        <p>Built custom automation syncing data across 5 different platforms in real-time. Eliminated manual data entry and reduced errors by 95%.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">n8n</span>
-                            <span class="tech-tag">API Integration</span>
-                            <span class="tech-tag">Airtable</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -854,41 +980,61 @@
             <h2 class="section-title">Our Services</h2>
             <p class="section-subtitle">Comprehensive automation and virtual assistance solutions</p>
             
-            <div class="services-grid">
-                <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
-                    <h3>Workflow Automation</h3>
-                    <p>Streamline repetitive tasks and connect your tools seamlessly. Build custom workflows that run on autopilot, saving time and reducing errors.</p>
-                </div>
-                
-                <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbots"></div>
-                    <h3>AI Chatbots</h3>
-                    <p>Engage customers 24/7 with intelligent chatbots that understand context, provide real value, and escalate to humans when needed.</p>
-                </div>
-                
-                <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agents"></div>
-                    <h3>AI Agents</h3>
-                    <p>Deploy autonomous AI agents that handle complex tasks, make intelligent decisions, and learn from every interaction.</p>
-                </div>
-                
-                <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
-                    <h3>CRM Integration</h3>
-                    <p>Optimize customer relationships with smart CRM systems that track leads, analyze patterns, and nurture relationships automatically.</p>
-                </div>
-                
-                <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
-                    <h3>Virtual Assistance</h3>
-                    <p>Get dedicated support for administrative tasks, customer service, scheduling, research, and day-to-day business operations.</p>
-                </div>
-                
-                <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/BWecRclZMfQgGrDZ.png" alt="Custom Solutions"></div>
-                    <h3>Custom Solutions</h3>
-                    <p>Tailored automation strategies designed specifically for your unique business needs, challenges, and growth goals.</p>
+            <div class="services-swiper-container">
+                <div class="swiper" id="servicesSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide swiper-slide-services">
+                            <div class="service-card" data-tilt>
+                                <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
+                                <h3>Workflow Automation</h3>
+                                <p>Streamline repetitive tasks and connect your tools seamlessly. Build custom workflows that run on autopilot, saving time and reducing errors.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide swiper-slide-services">
+                            <div class="service-card" data-tilt>
+                                <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbots"></div>
+                                <h3>AI Chatbots</h3>
+                                <p>Engage customers 24/7 with intelligent chatbots that understand context, provide real value, and escalate to humans when needed.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide swiper-slide-services">
+                            <div class="service-card" data-tilt>
+                                <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agents"></div>
+                                <h3>AI Agents</h3>
+                                <p>Deploy autonomous AI agents that handle complex tasks, make intelligent decisions, and learn from every interaction.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide swiper-slide-services">
+                            <div class="service-card" data-tilt>
+                                <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
+                                <h3>CRM Integration</h3>
+                                <p>Optimize customer relationships with smart CRM systems that track leads, analyze patterns, and nurture relationships automatically.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide swiper-slide-services">
+                            <div class="service-card" data-tilt>
+                                <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
+                                <h3>Virtual Assistance</h3>
+                                <p>Get dedicated support for administrative tasks, customer service, scheduling, research, and day-to-day business operations.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="swiper-slide swiper-slide-services">
+                            <div class="service-card" data-tilt>
+                                <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/BWecRclZMfQgGrDZ.png" alt="Custom Solutions"></div>
+                                <h3>Custom Solutions</h3>
+                                <p>Tailored automation strategies designed specifically for your unique business needs, challenges, and growth goals.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </div>
@@ -1087,7 +1233,117 @@
         </div>
     </footer>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Vanilla Tilt JS (3D Tilt Effect) -->
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+
     <script>
+        // Initialize Lenis Smooth Scroll
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false,
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        // Initialize Vanilla Tilt on all cards
+        VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
+            max: 25,
+            scale: 1.05,
+            speed: 400,
+            transition: true,
+        });
+
+        // Initialize Portfolio Swiper
+        const portfolioSwiper = new Swiper('#portfolioSwiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                },
+                1024: {
+                    slidesPerView: 'auto',
+                },
+            }
+        });
+
+        // Initialize Services Swiper
+        const servicesSwiper = new Swiper('#servicesSwiper', {
+            effect: 'cards',
+            grabCursor: true,
+            cardsEffect: {
+                perSlideRotate: 2,
+                perSlideOffset: 8,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                    cardsEffect: {
+                        perSlideRotate: 2,
+                        perSlideOffset: 8,
+                    }
+                },
+                1024: {
+                    slidesPerView: 3,
+                    cardsEffect: {
+                        perSlideRotate: 2,
+                        perSlideOffset: 8,
+                    }
+                },
+            }
+        });
+
         // Header Scroll Effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
