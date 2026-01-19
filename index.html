@@ -28,32 +28,10 @@
             line-height: 1.6;
         }
 
-        /* Grainy Texture Overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/></filter><rect width="100" height="100" fill="%23000000" filter="url(%23noise)" opacity="0.03"/></svg>');
-            background-size: 100px 100px;
-            pointer-events: none;
-            z-index: 1;
-            animation: grain 8s steps(10) infinite;
-        }
-
-        @keyframes grain {
-            0% { background-position: 0 0; }
-            100% { background-position: 100px 100px; }
-        }
-
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            position: relative;
-            z-index: 2;
         }
 
         /* Background Animation */
@@ -63,7 +41,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            z-index: -1;
             overflow: hidden;
         }
 
@@ -113,11 +91,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
         }
 
         .nav-links {
@@ -165,8 +138,6 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
-            position: relative;
-            overflow: hidden;
         }
 
         .cta-button:hover {
@@ -191,8 +162,6 @@
         /* Page Sections */
         section {
             padding: 120px 0;
-            position: relative;
-            z-index: 2;
         }
 
         .section-title {
@@ -275,40 +244,14 @@
             transform: translateY(-2px);
         }
 
-        /* Marquee Container */
-        .marquee-container {
-            overflow: hidden;
-            width: 100%;
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
             margin-top: 60px;
         }
 
-        .marquee-track {
-            display: flex;
-            gap: 30px;
-            animation: marquee 60s linear infinite;
-            width: fit-content;
-            padding: 20px 0;
-        }
-
-        .marquee-track:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes marquee {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .marquee-item {
-            flex-shrink: 0;
-            min-width: 400px;
-        }
-
-        /* Project Card */
         .project-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -317,10 +260,6 @@
             overflow: hidden;
             transition: all 0.4s ease;
             cursor: pointer;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transform-style: preserve-3d;
         }
 
         .project-card:hover {
@@ -349,9 +288,6 @@
 
         .project-content {
             padding: 30px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         .project-category {
@@ -372,7 +308,6 @@
             color: var(--text-gray);
             line-height: 1.8;
             margin-bottom: 20px;
-            flex: 1;
         }
 
         .tech-tags {
@@ -390,7 +325,14 @@
             color: var(--primary-cyan);
         }
 
-        /* Service Card */
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
         .service-card {
             background: var(--card-bg);
             backdrop-filter: blur(10px);
@@ -400,11 +342,6 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            transform-style: preserve-3d;
-            min-width: 350px;
         }
 
         .service-card::before {
@@ -459,7 +396,6 @@
             position: relative;
             z-index: 1;
             line-height: 1.8;
-            flex: 1;
         }
 
         /* Process Section */
@@ -487,11 +423,6 @@
             font-weight: bold;
             margin: 0 auto 25px;
             box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .process-step:hover .step-number {
-            transform: scale(1.1) rotateZ(5deg);
         }
 
         .process-step h3 {
@@ -520,12 +451,6 @@
             border-radius: 20px;
             padding: 40px;
             position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            border-color: var(--primary-cyan);
-            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.15);
         }
 
         .quote-icon {
@@ -761,8 +686,9 @@
                 grid-template-columns: 1fr;
             }
 
-            .marquee-item {
-                min-width: 300px;
+            .portfolio-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -827,231 +753,142 @@
         </div>
     </section>
 
-    <!-- Portfolio Section with Infinite Marquee -->
+    <!-- Portfolio Section -->
     <section id="portfolio">
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <p class="section-subtitle">Real solutions that delivered measurable results for our clients</p>
             
-            <div class="marquee-container">
-                <div class="marquee-track" id="portfolioMarquee">
-                    <!-- Project 1 -->
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
-                            <div class="project-content">
-                                <p class="project-category">Workflow Automation</p>
-                                <h3>SaaS Customer Onboarding System</h3>
-                                <p>Automated complete customer onboarding workflow, reducing manual work from 2 days to 2 hours per client.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">n8n</span>
-                                    <span class="tech-tag">Airtable</span>
-                                    <span class="tech-tag">Zapier</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbot"></div>
-                            <div class="project-content">
-                                <p class="project-category">AI Chatbot</p>
-                                <h3>24/7 Customer Support Bot</h3>
-                                <p>Built intelligent chatbot handling 80% of customer inquiries automatically. Reduced support costs by 60%.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">OpenAI</span>
-                                    <span class="tech-tag">Custom API</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3 -->
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
-                            <div class="project-content">
-                                <p class="project-category">CRM Integration</p>
-                                <h3>Sales Pipeline Automation</h3>
-                                <p>Streamlined sales process by automating lead capture and qualification. Increased productivity by 40%.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">Zapier</span>
-                                    <span class="tech-tag">HubSpot</span>
-                                    <span class="tech-tag">Python</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 -->
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agent"></div>
-                            <div class="project-content">
-                                <p class="project-category">AI Agent</p>
-                                <h3>Intelligent Lead Qualification Agent</h3>
-                                <p>Deployed autonomous AI agent that qualifies leads and schedules meetings. Saved 15+ hours weekly.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">n8n</span>
-                                    <span class="tech-tag">AI/ML</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 5 -->
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
-                            <div class="project-content">
-                                <p class="project-category">Virtual Assistance</p>
-                                <h3>Executive Support Package</h3>
-                                <p>Provided dedicated virtual assistant for calendar management and administrative tasks. Freed up 20 hours monthly.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">Admin Support</span>
-                                    <span class="tech-tag">Scheduling</span>
-                                    <span class="tech-tag">Research</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 6 -->
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/GgFPxKiEOssnkWPu.png" alt="Process Automation"></div>
-                            <div class="project-content">
-                                <p class="project-category">Process Automation</p>
-                                <h3>Multi-Platform Data Sync</h3>
-                                <p>Built custom automation syncing data across 5 platforms in real-time. Reduced errors by 95%.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">n8n</span>
-                                    <span class="tech-tag">API Integration</span>
-                                    <span class="tech-tag">Airtable</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Duplicate items for seamless loop -->
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
-                            <div class="project-content">
-                                <p class="project-category">Workflow Automation</p>
-                                <h3>SaaS Customer Onboarding System</h3>
-                                <p>Automated complete customer onboarding workflow, reducing manual work from 2 days to 2 hours per client.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">n8n</span>
-                                    <span class="tech-tag">Airtable</span>
-                                    <span class="tech-tag">Zapier</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="marquee-item">
-                        <div class="project-card">
-                            <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbot"></div>
-                            <div class="project-content">
-                                <p class="project-category">AI Chatbot</p>
-                                <h3>24/7 Customer Support Bot</h3>
-                                <p>Built intelligent chatbot handling 80% of customer inquiries automatically. Reduced support costs by 60%.</p>
-                                <div class="tech-tags">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">OpenAI</span>
-                                    <span class="tech-tag">Custom API</span>
-                                </div>
-                            </div>
+            <div class="portfolio-grid">
+                <div class="project-card reveal">
+                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
+                    <div class="project-content">
+                        <p class="project-category">Workflow Automation</p>
+                        <h3>SaaS Customer Onboarding System</h3>
+                        <p>Automated complete customer onboarding workflow, reducing manual work from 2 days to 2 hours per client. Integrated with CRM and email marketing platforms.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">n8n</span>
+                            <span class="tech-tag">Airtable</span>
+                            <span class="tech-tag">Zapier</span>
                         </div>
                     </div>
                 </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbot"></div>
+                    <div class="project-content">
+                        <p class="project-category">AI Chatbot</p>
+                        <h3>24/7 Customer Support Bot</h3>
+                        <p>Built intelligent chatbot handling 80% of customer inquiries automatically, with seamless handoff to human agents for complex issues. Reduced support costs by 60%.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">OpenAI</span>
+                            <span class="tech-tag">Custom API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
+                    <div class="project-content">
+                        <p class="project-category">CRM Integration</p>
+                        <h3>Sales Pipeline Automation</h3>
+                        <p>Streamlined sales process by automating lead capture, qualification, and follow-ups. Increased sales team productivity by 40%.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Zapier</span>
+                            <span class="tech-tag">HubSpot</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agent"></div>
+                    <div class="project-content">
+                        <p class="project-category">AI Agent</p>
+                        <h3>Intelligent Lead Qualification Agent</h3>
+                        <p>Deployed autonomous AI agent that qualifies leads, schedules meetings, and enriches contact data. Saved sales team 15+ hours weekly.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">n8n</span>
+                            <span class="tech-tag">AI/ML</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
+                    <div class="project-content">
+                        <p class="project-category">Virtual Assistance</p>
+                        <h3>Executive Support Package</h3>
+                        <p>Provided dedicated virtual assistant for calendar management, email coordination, research, and administrative tasks. Freed up 20 hours monthly for strategic work.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Admin Support</span>
+                            <span class="tech-tag">Scheduling</span>
+                            <span class="tech-tag">Research</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/GgFPxKiEOssnkWPu.png" alt="Process Automation"></div>
+                    <div class="project-content">
+                        <p class="project-category">Process Automation</p>
+                        <h3>Multi-Platform Data Sync</h3>
+                        <p>Built custom automation syncing data across 5 different platforms in real-time. Eliminated manual data entry and reduced errors by 95%.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">n8n</span>
+                            <span class="tech-tag">API Integration</span>
+                            <span class="tech-tag">Airtable</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Services Section with Infinite Marquee -->
+    <!-- Services Section -->
     <section id="services" style="background: rgba(255, 255, 255, 0.02);">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <p class="section-subtitle">Comprehensive automation and virtual assistance solutions</p>
             
-            <div class="marquee-container">
-                <div class="marquee-track" id="servicesMarquee">
-                    <!-- Service 1 -->
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
-                            <h3>Workflow Automation</h3>
-                            <p>Streamline repetitive tasks and connect your tools seamlessly. Build custom workflows that run on autopilot.</p>
-                        </div>
-                    </div>
-
-                    <!-- Service 2 -->
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbots"></div>
-                            <h3>AI Chatbots</h3>
-                            <p>Engage customers 24/7 with intelligent chatbots that understand context and escalate to humans when needed.</p>
-                        </div>
-                    </div>
-
-                    <!-- Service 3 -->
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agents"></div>
-                            <h3>AI Agents</h3>
-                            <p>Deploy autonomous AI agents that handle complex tasks, make intelligent decisions, and learn from interactions.</p>
-                        </div>
-                    </div>
-
-                    <!-- Service 4 -->
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
-                            <h3>CRM Integration</h3>
-                            <p>Optimize customer relationships with smart CRM systems that track leads and nurture relationships automatically.</p>
-                        </div>
-                    </div>
-
-                    <!-- Service 5 -->
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
-                            <h3>Virtual Assistance</h3>
-                            <p>Get dedicated support for administrative tasks, customer service, scheduling, and day-to-day operations.</p>
-                        </div>
-                    </div>
-
-                    <!-- Service 6 -->
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/BWecRclZMfQgGrDZ.png" alt="Custom Solutions"></div>
-                            <h3>Custom Solutions</h3>
-                            <p>Tailored automation strategies designed specifically for your unique business needs and growth goals.</p>
-                        </div>
-                    </div>
-
-                    <!-- Duplicate items for seamless loop -->
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
-                            <h3>Workflow Automation</h3>
-                            <p>Streamline repetitive tasks and connect your tools seamlessly. Build custom workflows that run on autopilot.</p>
-                        </div>
-                    </div>
-
-                    <div class="marquee-item">
-                        <div class="service-card">
-                            <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbots"></div>
-                            <h3>AI Chatbots</h3>
-                            <p>Engage customers 24/7 with intelligent chatbots that understand context and escalate to humans when needed.</p>
-                        </div>
-                    </div>
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
+                    <h3>Workflow Automation</h3>
+                    <p>Streamline repetitive tasks and connect your tools seamlessly. Build custom workflows that run on autopilot, saving time and reducing errors.</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbots"></div>
+                    <h3>AI Chatbots</h3>
+                    <p>Engage customers 24/7 with intelligent chatbots that understand context, provide real value, and escalate to humans when needed.</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agents"></div>
+                    <h3>AI Agents</h3>
+                    <p>Deploy autonomous AI agents that handle complex tasks, make intelligent decisions, and learn from every interaction.</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
+                    <h3>CRM Integration</h3>
+                    <p>Optimize customer relationships with smart CRM systems that track leads, analyze patterns, and nurture relationships automatically.</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
+                    <h3>Virtual Assistance</h3>
+                    <p>Get dedicated support for administrative tasks, customer service, scheduling, research, and day-to-day business operations.</p>
+                </div>
+                
+                <div class="service-card reveal">
+                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/BWecRclZMfQgGrDZ.png" alt="Custom Solutions"></div>
+                    <h3>Custom Solutions</h3>
+                    <p>Tailored automation strategies designed specifically for your unique business needs, challenges, and growth goals.</p>
                 </div>
             </div>
         </div>
@@ -1124,7 +961,7 @@
             <div class="testimonials-grid">
                 <div class="testimonial-card reveal">
                     <div class="quote-icon">"</div>
-                    <p class="testimonial-text">Loom and Logic transformed our customer onboarding process. What used to take 2 days now happens in 2 hours. The ROI was immediate.</p>
+                    <p class="testimonial-text">Loom and Logic transformed our customer onboarding process. What used to take 2 days now happens in 2 hours. The ROI was immediate and the support has been exceptional.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">JM</div>
                         <div class="author-info">
@@ -1136,7 +973,7 @@
                 
                 <div class="testimonial-card reveal">
                     <div class="quote-icon">"</div>
-                    <p class="testimonial-text">The AI chatbot they built handles 80% of our support tickets automatically. Our team can finally focus on complex issues.</p>
+                    <p class="testimonial-text">The AI chatbot they built handles 80% of our support tickets automatically. Our team can finally focus on complex issues instead of answering the same questions repeatedly.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">SK</div>
                         <div class="author-info">
@@ -1148,7 +985,7 @@
                 
                 <div class="testimonial-card reveal">
                     <div class="quote-icon">"</div>
-                    <p class="testimonial-text">Working with Loom and Logic has been game-changing. Their virtual assistant service freed up 20 hours monthly.</p>
+                    <p class="testimonial-text">Working with Loom and Logic has been game-changing. Their virtual assistant service freed up 20 hours of my time monthly, and the automation they built increased our lead conversion by 35%.</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">DR</div>
                         <div class="author-info">
@@ -1170,7 +1007,7 @@
             <div class="contact-grid">
                 <div class="contact-info reveal">
                     <h3>Get in Touch</h3>
-                    <p>Have a project in mind? We'd love to hear from you. Let's discuss how we can help you automate your business.</p>
+                    <p>Have a project in mind? We'd love to hear from you. Let's discuss how we can help you automate your business and free up your time.</p>
                     
                     <div class="contact-methods">
                         <div class="contact-method">
@@ -1289,13 +1126,11 @@
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
 
-        // Form Submission
-        if (document.getElementById('contactForm')) {
-            document.getElementById('contactForm').addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your message! This is a demo, so no email was actually sent.');
-            });
-        }
+        // Form Submission (Prevent default for demo)
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! This is a demo, so no email was actually sent.');
+        });
     </script>
 </body>
 </html>
