@@ -1256,10 +1256,9 @@
         window.addEventListener('scroll', revealOnScroll, { passive: true });
         window.addEventListener('load', revealOnScroll);
 
-        // Form Submission (Prevent default for demo)
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! This is a demo, so no email was actually sent.');
+        // Form Submission ()
+        document.getElementById('contactForm').addEventListener('submit', () => {
+            alert('Thank you! Your message has been sent successfully.');
         });
 
         // Start animation
