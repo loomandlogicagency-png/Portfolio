@@ -34,15 +34,29 @@
             padding: 0 20px;
         }
 
-        /* Canvas background layer for particle effect */
-        #particleCanvas {
+        /* Background Animation */
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100vh;
+            height: 100%;
             z-index: -1;
-            display: block;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.1;
+            animation: float 25s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(60px, -60px) scale(1.15); }
+            66% { transform: translate(-40px, 40px) scale(0.85); }
         }
 
         /* Header/Navigation */
@@ -157,14 +171,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-align: center;
         }
 
         .section-subtitle {
             color: var(--text-gray);
             font-size: 1.2rem;
             margin-bottom: 60px;
-            text-align: center;
         }
 
         /* Hero Section */
@@ -263,13 +275,6 @@
             justify-content: center;
             font-size: 4rem;
             border-bottom: 1px solid var(--border-color);
-            padding: 20px;
-        }
-
-        .project-image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
         }
 
         .project-content {
@@ -353,20 +358,10 @@
         }
 
         .service-icon {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 20px;
             position: relative;
             z-index: 1;
-        }
-
-        .service-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
         }
 
         .service-card h3 {
@@ -653,6 +648,7 @@
                 background: rgba(10, 14, 39, 0.98);
                 flex-direction: column;
                 padding: 20px;
+                border-bottom: 1px solid var(--border-color);
             }
 
             .nav-links.active {
@@ -696,8 +692,12 @@
     </style>
 </head>
 <body>
-    <!-- Canvas for particle field background -->
-    <canvas id="particleCanvas"></canvas>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="gradient-orb" style="width: 500px; height: 500px; background: var(--primary-cyan); top: 5%; left: 5%;"></div>
+        <div class="gradient-orb" style="width: 400px; height: 400px; background: var(--primary-purple); bottom: 10%; right: 10%; animation-delay: -8s;"></div>
+        <div class="gradient-orb" style="width: 350px; height: 350px; background: var(--primary-cyan); top: 50%; left: 50%; animation-delay: -15s;"></div>
+    </div>
 
     <!-- Header -->
     <header id="header">
@@ -742,7 +742,7 @@
             
             <div class="portfolio-grid">
                 <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
+                    <div class="project-image">📊</div>
                     <div class="project-content">
                         <p class="project-category">Workflow Automation</p>
                         <h3>SaaS Customer Onboarding System</h3>
@@ -756,7 +756,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbot"></div>
+                    <div class="project-image">🤖</div>
                     <div class="project-content">
                         <p class="project-category">AI Chatbot</p>
                         <h3>24/7 Customer Support Bot</h3>
@@ -770,11 +770,11 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
+                    <div class="project-image">🎯</div>
                     <div class="project-content">
                         <p class="project-category">CRM Integration</p>
                         <h3>Sales Pipeline Automation</h3>
-                        <p>Streamlined sales process by automating lead capture, qualification, and follow-ups. Increased sales team productivity by 40%.</p>
+                        <p>Connected marketing tools, CRM, and communication platforms. Automated lead scoring, follow-ups, and reporting. Increased conversion rate by 35%.</p>
                         <div class="tech-tags">
                             <span class="tech-tag">Zapier</span>
                             <span class="tech-tag">HubSpot</span>
@@ -784,7 +784,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agent"></div>
+                    <div class="project-image">📈</div>
                     <div class="project-content">
                         <p class="project-category">AI Agent</p>
                         <h3>Intelligent Lead Qualification Agent</h3>
@@ -798,7 +798,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
+                    <div class="project-image">👤</div>
                     <div class="project-content">
                         <p class="project-category">Virtual Assistance</p>
                         <h3>Executive Support Package</h3>
@@ -812,7 +812,7 @@
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-image"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/GgFPxKiEOssnkWPu.png" alt="Process Automation"></div>
+                    <div class="project-image">⚡</div>
                     <div class="project-content">
                         <p class="project-category">Process Automation</p>
                         <h3>Multi-Platform Data Sync</h3>
@@ -824,6 +824,25 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ADD YOUR NEW PROJECTS BELOW THIS COMMENT -->
+                <!-- Copy and paste this template, then customize it -->
+                
+                <!-- EXAMPLE NEW PROJECT 1
+                <div class="project-card reveal">
+                    <div class="project-image">📧</div>
+                    <div class="project-content">
+                        <p class="project-category">Email Automation</p>
+                        <h3>Your Project Title Here</h3>
+                        <p>Your project description here. Explain what you built and the results achieved.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Technology 1</span>
+                            <span class="tech-tag">Technology 2</span>
+                            <span class="tech-tag">Technology 3</span>
+                        </div>
+                    </div>
+                </div>
+                -->
 
             </div>
         </div>
@@ -837,37 +856,37 @@
             
             <div class="services-grid">
                 <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/VDuAQmbbNtYCvVcd.png" alt="Workflow Automation"></div>
+                    <div class="service-icon">⚙️</div>
                     <h3>Workflow Automation</h3>
                     <p>Streamline repetitive tasks and connect your tools seamlessly. Build custom workflows that run on autopilot, saving time and reducing errors.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/YYgWjNORJugRSgTZ.png" alt="AI Chatbots"></div>
+                    <div class="service-icon">🤖</div>
                     <h3>AI Chatbots</h3>
                     <p>Engage customers 24/7 with intelligent chatbots that understand context, provide real value, and escalate to humans when needed.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/fGQlGzQYGppXWVnP.png" alt="AI Agents"></div>
+                    <div class="service-icon">🧠</div>
                     <h3>AI Agents</h3>
                     <p>Deploy autonomous AI agents that handle complex tasks, make intelligent decisions, and learn from every interaction.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/QEzuPtAuoxeMKEfX.png" alt="CRM Integration"></div>
+                    <div class="service-icon">📈</div>
                     <h3>CRM Integration</h3>
                     <p>Optimize customer relationships with smart CRM systems that track leads, analyze patterns, and nurture relationships automatically.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/KxPuqQWDMQaIkRXb.png" alt="Virtual Assistance"></div>
+                    <div class="service-icon">👤</div>
                     <h3>Virtual Assistance</h3>
                     <p>Get dedicated support for administrative tasks, customer service, scheduling, research, and day-to-day business operations.</p>
                 </div>
                 
                 <div class="service-card reveal">
-                    <div class="service-icon"><img src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663302363559/BWecRclZMfQgGrDZ.png" alt="Custom Solutions"></div>
+                    <div class="service-icon">🎯</div>
                     <h3>Custom Solutions</h3>
                     <p>Tailored automation strategies designed specifically for your unique business needs, challenges, and growth goals.</p>
                 </div>
@@ -988,44 +1007,57 @@
             <div class="contact-grid">
                 <div class="contact-info reveal">
                     <h3>Get in Touch</h3>
-                    <p>Have a project in mind? We'd love to hear from you. Let's discuss how we can help you automate your business and free up your time.</p>
+                    <p>Whether you need workflow automation, AI agents, virtual assistance, or a custom solution, we're here to help. Let's discuss your project and how we can drive real results for your business.</p>
                     
                     <div class="contact-methods">
                         <div class="contact-method">
                             <div class="contact-icon">📧</div>
                             <div>
-                                <h4>Email Us</h4>
+                                <strong>Email</strong><br>
                                 <a href="mailto:loomandlogicagency@gmail.com">loomandlogicagency@gmail.com</a>
                             </div>
                         </div>
+                        
                         <div class="contact-method">
-                            <div class="contact-icon">📅</div>
+                            <div class="contact-icon">⚡</div>
                             <div>
-                                <h4>Book a Call</h4>
-                                <a href="#">Schedule a discovery session</a>
+                                <strong>Response Time</strong><br>
+                                Within 24 hours
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="contact-icon">🌍</div>
+                            <div>
+                                <strong>Location</strong><br>
+                                Nairobi, Kenya (Serving Global Clients)
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="contact-form reveal">
-                    <form id="contactForm">
+                    <form onsubmit="handleSubmit(event)">
                         <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            <input type="email" id="email" name="email" required>
                         </div>
+                        
                         <div class="form-group">
                             <label for="service">Service Interested In</label>
-                            <input type="text" id="service" name="service" placeholder="e.g., Workflow Automation">
+                            <input type="text" id="service" name="service" placeholder="e.g., Workflow Automation, AI Chatbot">
                         </div>
+                        
                         <div class="form-group">
-                            <label for="message">Your Message</label>
-                            <textarea id="message" name="message" placeholder="Tell us about your project..." required></textarea>
+                            <label for="message">Tell Us About Your Project</label>
+                            <textarea id="message" name="message" required></textarea>
                         </div>
+                        
                         <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
                     </form>
                 </div>
@@ -1038,225 +1070,106 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <div class="logo" style="margin-bottom: 20px;">LOOM AND LOGIC</div>
-                    <p>Empowering B2B founders through intelligent automation and dedicated virtual assistance.</p>
+                    <h4>Loom and Logic Agency</h4>
+                    <p>Helping B2B founders scale through intelligent automation and virtual assistance.</p>
                 </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="#hero">Home</a>
-                    <a href="#portfolio">Portfolio</a>
-                    <a href="#services">Services</a>
-                    <a href="#process">Process</a>
-                </div>
+                
                 <div class="footer-section">
                     <h4>Services</h4>
                     <a href="#services">Workflow Automation</a>
                     <a href="#services">AI Chatbots</a>
+                    <a href="#services">AI Agents</a>
                     <a href="#services">CRM Integration</a>
                     <a href="#services">Virtual Assistance</a>
                 </div>
+                
                 <div class="footer-section">
-                    <h4>Connect</h4>
-                    <a href="#">LinkedIn</a>
-                    <a href="#">Twitter</a>
-                    <a href="#">Instagram</a>
+                    <h4>Company</h4>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#process">Our Process</a>
+                    <a href="#testimonials">Testimonials</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Tech Stack</h4>
+                    <p>n8n • Python • Zapier • Airtable • OpenAI • Custom APIs</p>
                 </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2024 Loom and Logic Agency. All rights reserved.</p>
+                <p>&copy; 2025 Loom and Logic Agency. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Particle Field / Data Flow Effect
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        // Detect device type and optimize particle count
-        function getOptimizedSettings() {
-            const isMobile = window.innerWidth < 768;
-            const isTablet = window.innerWidth < 1024;
-            
-            if (isMobile) {
-                return {
-                    particleCount: 40,
-                    connectionDistance: 100,
-                    speed: 1.0
-                };
-            } else if (isTablet) {
-                return {
-                    particleCount: 60,
-                    connectionDistance: 120,
-                    speed: 1.2
-                };
-            } else {
-                return {
-                    particleCount: 80,
-                    connectionDistance: 150,
-                    speed: 1.5
-                };
-            }
-        }
-
-        let settings = getOptimizedSettings();
-        
-        // Particle system
-        const particles = [];
-        let particleCount = settings.particleCount;
-        let connectionDistance = settings.connectionDistance;
-        let particleSpeed = settings.speed;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * particleSpeed;
-                this.vy = (Math.random() - 0.5) * particleSpeed;
-                this.radius = Math.random() * 1.5 + 0.5;
-                this.opacity = Math.random() * 0.4 + 0.2;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Wrap around edges
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.y < 0) this.y = canvas.height;
-                if (this.y > canvas.height) this.y = 0;
-            }
-
-            draw() {
-                ctx.fillStyle = `rgba(0, 217, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        // Initialize particles
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function drawConnections() {
-            // Use squared distance to avoid sqrt calculations
-            const connectionDistanceSq = connectionDistance * connectionDistance;
-            
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distanceSq = dx * dx + dy * dy;
-
-                    if (distanceSq < connectionDistanceSq) {
-                        const distance = Math.sqrt(distanceSq);
-                        const opacity = (1 - distance / connectionDistance) * 0.25;
-                        ctx.strokeStyle = `rgba(0, 217, 255, ${opacity})`;
-                        ctx.lineWidth = 0.8;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            // Clear canvas with semi-transparent background for trail effect
-            ctx.fillStyle = 'rgba(10, 14, 39, 0.15)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Update and draw particles
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-            }
-
-            // Draw connections between nearby particles
-            drawConnections();
-
-            requestAnimationFrame(animate);
-        }
-
-        // Handle window resize with debounce
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                
-                // Re-optimize settings on resize
-                const newSettings = getOptimizedSettings();
-                if (newSettings.particleCount !== particleCount) {
-                    particleCount = newSettings.particleCount;
-                    connectionDistance = newSettings.connectionDistance;
-                    particleSpeed = newSettings.speed;
-                    
-                    // Adjust particle count
-                    if (particles.length > particleCount) {
-                        particles.splice(particleCount);
-                    } else if (particles.length < particleCount) {
-                        for (let i = particles.length; i < particleCount; i++) {
-                            particles.push(new Particle());
-                        }
-                    }
-                }
-            }, 250);
-        });
-
-        // Header Scroll Effect with passive listener
-        let scrollTimeout;
+        // Header scroll effect
         window.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
             const header = document.getElementById('header');
             if (window.scrollY > 50) {
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
             }
-        }, { passive: true });
+        });
 
-        // Mobile Menu Toggle
+        // Mobile menu toggle
         function toggleMobileMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         }
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
             });
+        }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
         });
 
-        // Simple Scroll Reveal with passive listener
-        const revealElements = document.querySelectorAll('.reveal');
-        let revealTimeout;
-        const revealOnScroll = () => {
-            clearTimeout(revealTimeout);
-            revealTimeout = setTimeout(() => {
-                revealElements.forEach(el => {
-                    const elementTop = el.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    if (elementTop < windowHeight - 100) {
-                        el.classList.add('active');
-                    }
-                });
-            }, 100);
-        };
+        revealElements.forEach(element => {
+            revealObserver.observe(element);
+        });
 
-        window.addEventListener('scroll', revealOnScroll, { passive: true });
-        window.addEventListener('load', revealOnScroll);
-        // Start animation
-        animate();
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // Create mailto link
+            const subject = encodeURIComponent(`New Project Inquiry from ${data.name}`);
+            const body = encodeURIComponent(`
+Name: ${data.name}
+Email: ${data.email}
+Service: ${data.service}
+
+Message:
+${data.message}
+            `);
+            
+            window.location.href = `mailto:loomandlogicagency@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Show success message
+            alert('Thank you! Your message is being prepared. Your email client will open to send the message.');
+            event.target.reset();
+        }
+
+        // Smooth scroll for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
     </script>
 </body>
 </html>
